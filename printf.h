@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:40:43 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/28 14:51:28 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/10 12:56:04 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 # include <stdio.h>
 
 typedef struct	s_flag
@@ -32,21 +32,33 @@ typedef struct	s_flag
 	unsigned int	minus : 1;
 	unsigned int	space : 1;
 	unsigned int	width;
-	int				pre;
+	int				prec;
 }				t_flag;
 
 typedef struct	s_buffnret
 {
-	int		ret;
-	char	*buff;
+	int			ret;
+	char		*buff;
 }				t_br;
 
-int		main(void);
-int		checkflag(int *i,, const char *fmt, t_flag *flag);
-int		ft_printf(const char *fmt, ...);
-int		parse(char c, t_br *br, va_list ap, t_flag);
-int		conv_int(t_br *br, va_list ap, t_flag flag);
-int		ft_br(char c, t_br *br);
-int		is_conv(char c);
+int				main(void);
+int				checkflag(int *i, const char *fmt, t_flag *flag);
+int				ft_printf(const char *fmt, ...);
+int				parse(char c, t_br *br, va_list ap, t_flag flag);
+int				conv_int(t_br *br, va_list ap, t_flag flag);
+int				ft_br(char c, t_br *br);
+int				is_conv(char c);
+int				chk_width(const char *fmt, int *i, t_flag *flag);
+int				chk_flag(const char *fmt, int *i, t_flag *flag);
+int				chk_modhl(const char *fmt, int *i, t_flag *flag);
+int				chk_modjz(const char *fmt, int *i, t_flag *flag);
+int				chk_prec(const char *fmt, int *i, t_flag *flag);
+intmax_t		modif_long_int(va_list ap, t_flag flag);
+int				ft_precision(char **str, t_flag flag, intmax_t nb, int size);
+int				ft_width(char **str, t_flag flag, intmax_t nb, int size);
+int				conv_uint(t_br *br, va_list ap, t_flag flag, char c);
+uintmax_t		modif_long(va_list ap, t_flag flag);
+int				conv_str(t_br *br, va_list ap, t_flag flag);
+int				conv_char(t_br *br, va_list ap, t_flag flag);
 
 #endif

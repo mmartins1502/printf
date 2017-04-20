@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:27:14 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/28 14:51:03 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/10 14:02:25 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		parse(char c, t_br *br, va_list ap, t_flag flag)
 		conv_uint(br, ap, flag, c);
 	else if (c == 's' || c == 'S')
 		conv_str(br, ap, flag);
-	else if (c == 'c' || c == 'C')
-		conv_char(br, ap, flag);
+	// else if (c == 'c' || c == 'C')
+	// 	conv_char(br, ap, flag);
 	return (1);
 }
 
@@ -43,9 +43,9 @@ int		checkflag(int *i, const char *fmt, t_flag *flag)
 	{
 		if (is_conv(fmt[*i]) == 1)
 			return (1);
-		else if (!chk_flag(frmt, i, flag) && !chk_width(frmt, i, flag) &&
-			!chk_pre(frmt, i, flag) && !chk_modhl(frmt, i, flag)
-			&& !chk_modjz(frmt, i, flag))
+		else if (!chk_flag(fmt, i, flag) && !chk_width(fmt, i, flag) &&
+			!chk_prec(fmt, i, flag) && !chk_modhl(fmt, i, flag)
+			&& !chk_modjz(fmt, i, flag))
 			return (0);
 		else
 			*i = *i + 1;
@@ -78,11 +78,11 @@ int		ft_printf(const char *fmt, ...)
 	i = -1;
 	va_start(ap, fmt);
 	ft_memset(&br, 0, sizeof(t_br));
-	while (fmt && fmt[++i])
+	while (fmt[++i])
 	{
 		ft_memset(&flag, 0, sizeof(t_flag));
 		flag.prec = -1;
-		if (fmt[++i] == '%')
+		if (fmt[i] == '%')
 		{
 			if (checkflag(&i, fmt, &flag) == 1)
 				parse(fmt[i], &br, ap, flag);
@@ -92,4 +92,8 @@ int		ft_printf(const char *fmt, ...)
 		else
 			ft_br(fmt[i], &br);
 	}
+	va_end(ap);
+	ft_putnstr(br.buff, br.ret);
+	free(br.buff);
+	return (br.ret);
 }

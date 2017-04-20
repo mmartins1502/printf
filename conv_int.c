@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv.c                                             :+:      :+:    :+:   */
+/*   conv_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:16:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/28 14:00:32 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/07 17:22:59 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int		ft_width(char **str, t_flag flag, int nb, int size)
+#include "printf.h"
+
+int			ft_width(char **str, t_flag flag, intmax_t nb, int size)
 {
 	char	c;
 	char	*tmp;
@@ -29,7 +31,7 @@ static int		ft_width(char **str, t_flag flag, int nb, int size)
 	return (1);
 }
 
-static int		set_sign(char **str, int nb, int size)
+static int		set_sign(char **str, intmax_t nb, int size)
 {
 	char	*tmp;
 	char	c;
@@ -46,7 +48,7 @@ static int		set_sign(char **str, int nb, int size)
 	return (1);
 }
 
-static int		ft_precision(char **str, t_flag flag, int nb, int size)
+int				ft_precision(char **str, t_flag flag, intmax_t nb, int size)
 {
 	char	*tmp;
 
@@ -60,24 +62,24 @@ static int		ft_precision(char **str, t_flag flag, int nb, int size)
 	return (1);
 }
 
-static int		reset_flag(int nb, t_flag *flag)
+static int			reset_flag(intmax_t nb, t_flag *flag)
 {
 	if (flag->zero == 1 && (flag->prec >= 0 || flag->minus == 1))
-		flag->zero == 0;
+		flag->zero = 0;
 	if (flag->space == 1 && (flag->plus == 1 || nb < 0))
-		flag->space == 0;
+		flag->space = 0;
 	return (1);
 }
 
 int				conv_int(t_br *br, va_list ap, t_flag flag)
 {
-	char	*str;
-	int		nb;
-	int		j;
-	int		size;
+	char			*str;
+	intmax_t		nb;
+	int				j;
+	int				size;
 
 	j = -1;
-	nb = va_arg(ap, int);
+	nb = modif_long_int(ap, flag);
 	str = ft_uitoa(nb);
 	reset_flag(nb, &flag);
 	if (flag.space == 1)
