@@ -6,7 +6,7 @@
 #    By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 14:30:39 by mmartins          #+#    #+#              #
-#    Updated: 2017/04/06 16:51:49 by mmartins         ###   ########.fr        #
+#    Updated: 2017/04/21 13:04:12 by mmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(SRC) -I.
+	gcc -g -Wall -Wextra -Werror -c $(SRC) -I.
 	ar rc $(NAME) $(OBJ)
 
 clean:

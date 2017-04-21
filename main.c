@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 14:01:51 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/10 17:00:37 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/21 13:14:39 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	test_3(void)
 	ft_printf("F = %x\n", 505);
 	printf("P = %x\n\n", 505);
 
-	// ft_printf("F = %X\n", 505);
+	ft_printf("F = %X\n", 505);
 	printf("P = %X\n\n", 505);
 	// ft_printf("%p\n", &ft_printf);
 
@@ -71,8 +71,9 @@ static void	test_2(void)
 	printf("P = %%\n", "test");
 	ft_printf("F = %%\n\n", "test");
 
-	// printf("P = % Z%s\n", "test");
-	// ft_printf("F = % Z%s\n", "test");
+	printf("P = % Z%s\n", "test");
+	ft_printf("F = % Z%s\n", "test");
+
 	printf("P = %05%\n");
 	ft_printf("F = %05%\n\n");//PB
 
@@ -94,7 +95,7 @@ static void	test_2(void)
 	// printf("p%p\n", 42);
 	// ft_printf("f%p\n", 42);
 	printf("P = %#X\n", 42);
-	// ft_printf("F = %#X\n", 42);// PB
+	ft_printf("F = %#X\n", 42);// PB
 	test_3();
 }
 
@@ -108,18 +109,23 @@ static void	test_1(void)
 	// ft_printf("f{%05.S}\n", 0);
 	// printf("p%C%C\n", '4', '2');
 	// ft_printf("f%C%C\n", '4', '2');
-	// printf("p%lc, %lc\n", L'暖', L'ح');
-	// ft_printf("f%lc, %lc\n", L'暖', L'ح');
+	printf("P = %lc, %lc\n", L'暖', L'ح');
+	ft_printf("F = %lc, %lc\n\n", L"暖", L"ح");
+
 	// printf("p%.4ls\n", L"我是一只猫。");
 	// ft_printf("f%.4S\n", L"我是一只猫。");
+
 	// printf("p%15.4ls\n", L"我是一只猫。");
 	// ft_printf("f%15.4S\n", L"我是一只猫。");
-	printf("P = {%c}\n", 'f');
-	ft_printf("F = {%c}\n\n", 'f');
+
+	printf("P = {%15.5c}\n", 'd');
+	ft_printf("F = {%15.5c}\n\n", 'd');
+
 	// printf("p{%-15Z}\n", 123);
 	// ft_printf("f{%-15Z}\n", 123);
-	printf("p%#o\n", 42);
-	ft_printf("f%#o\n\n", 42);
+
+	printf("P = %#o\n", 42);
+	ft_printf("F = %#o\n\n", 42);
 
 	printf("p.%%.%%.%%.%%.%%.%%.%%.%%.\n");
 	ft_printf("f.%%.%%.%%.%%.%%.%%.%%.%%.\n\n");
@@ -215,20 +221,25 @@ int			main(void)
 
 	ft_printf("F = %x\n", 1000);
 	printf("P = %x\n\n", 1000);
+
 	printf("P = %#X\n", 1000);
-	// ft_printf("%#X\n", 1000);
-	// printf("P %#X\n", 1000);
+	ft_printf("F = %#X\n", 1000);
+
 	ft_printf("F = %s\n", NULL);
 	printf("P = %s\n", NULL);
+
 	// ft_printf("%S\n", L"ݗݜशব");
 	// printf("%S\n", L"ݗݜशব");
+
 	ft_printf("F = %s%s\n", "test", "test");
 	printf("P = %s%s\n\n", "test", "test");
 
 	ft_printf("F = %s%s%s\n", "test", "test", "test");
 	printf("P = %s%s%s\n\n", "test", "test", "test");
-	// ft_printf("%C\n", 15000);
-	// printf("%C\n", 15000);
+
+	ft_printf("%C\n", 15000);
+	printf("%C\n", 15000);
+
 	test_0();
 	return (0);
 }

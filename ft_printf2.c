@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:27:14 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/10 14:02:25 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/21 11:37:30 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		parse(char c, t_br *br, va_list ap, t_flag flag)
 		conv_uint(br, ap, flag, c);
 	else if (c == 's' || c == 'S')
 		conv_str(br, ap, flag);
-	// else if (c == 'c' || c == 'C')
-	// 	conv_char(br, ap, flag);
+	else if (c == 'c' || c == 'C')
+		conv_char(br, ap, flag);
 	return (1);
 }
 

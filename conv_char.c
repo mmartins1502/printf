@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:54:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/10 16:50:05 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/21 11:53:24 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int			conv_char(t_br *br, va_list ap, t_flag flag)
 
 	c = (flag.zero == 1 ? '0' : ' ');
 	x = (char)va_arg(ap, int);
-	ft_br(x, br);
 	if (flag.width > 1)
 		ft_width_char(c, flag.width - 1, br);
+	ft_br(x, br);
 	return (1);
 }
