@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:27:14 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/21 11:37:30 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:39:47 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int		parse(char c, t_br *br, va_list ap, t_flag flag)
 	else if (c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
 	|| c == 'X')
 		conv_uint(br, ap, flag, c);
-	else if (c == 's' || c == 'S')
+	else if (c == 's' && flag.l != 1)
 		conv_str(br, ap, flag);
-	else if (c == 'c' || c == 'C')
+	else if (c == 'S' || (c == 's' && flag.l == 1))
+		conv_wstr(br, ap, flag);
+	else if (c == 'c' && flag.l != 1)
 		conv_char(br, ap, flag);
+	else if (c == 'C' || (c == 'c' && flag.l == 1))
+		conv_wchar(br, ap, flag);
 	return (1);
 }
 
@@ -53,31 +57,12 @@ int		checkflag(int *i, const char *fmt, t_flag *flag)
 	return (0);
 }
 
-int		ft_br(char c, t_br *br)
+int		ft_printf2(const char *fmt, t_br *br, va_list ap)
 {
-	char	*tmp;
-
-	tmp = ft_strnew(br->ret + 1);
-	ft_memcpy(tmp, br->buff, br->ret);
-	free(br->buff);
-	tmp[br->ret] = c;
-	br->ret += 1;
-	br->buff = ft_memalloc(br->ret * sizeof(char *));
-	ft_memcpy(br->buff, tmp, br->ret + 1);
-	free(tmp);
-	return (1);
-}
-
-int		ft_printf(const char *fmt, ...)
-{
-	va_list	ap;
-	t_br	br;
 	t_flag	flag;
 	int		i;
 
 	i = -1;
-	va_start(ap, fmt);
-	ft_memset(&br, 0, sizeof(t_br));
 	while (fmt[++i])
 	{
 		ft_memset(&flag, 0, sizeof(t_flag));
@@ -85,13 +70,24 @@ int		ft_printf(const char *fmt, ...)
 		if (fmt[i] == '%')
 		{
 			if (checkflag(&i, fmt, &flag) == 1)
-				parse(fmt[i], &br, ap, flag);
+				parse(fmt[i], br, ap, flag);
 			else
-				ft_br(fmt[i], &br);
+				ft_br(fmt[i], br);
 		}
 		else
-			ft_br(fmt[i], &br);
+			ft_br(fmt[i], br);
 	}
+	return (1);
+}
+
+int		ft_printf(const char *fmt, ...)
+{
+	va_list	ap;
+	t_br	br;
+
+	va_start(ap, fmt);
+	ft_memset(&br, 0, sizeof(t_br));
+	ft_printf2(fmt, &br, ap);
 	va_end(ap);
 	ft_putnstr(br.buff, br.ret);
 	free(br.buff);

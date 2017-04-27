@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_char.c                                        :+:      :+:    :+:   */
+/*   conv_wchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/10 12:54:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/27 17:34:43 by mmartins         ###   ########.fr       */
+/*   Created: 2017/04/26 12:23:44 by mmartins          #+#    #+#             */
+/*   Updated: 2017/04/27 17:52:05 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static int	ft_width_char(char c, int n, t_br *br)
+static int	ft_width_wchar(char c, int n, t_br *br)
 {
 	int		i;
 
@@ -25,15 +25,23 @@ static int	ft_width_char(char c, int n, t_br *br)
 	return (1);
 }
 
-int			conv_char(t_br *br, va_list ap, t_flag flag)
+int			conv_wchar(t_br *br, va_list ap, t_flag flag)
 {
+	char	*str;
+	int		ret;
+	int		i;
 	char	c;
-	char	x;
 
 	c = (flag.zero == 1 ? '0' : ' ');
-	x = (char)va_arg(ap, int);
-	if (flag.width > 1)
-		ft_width_char(c, flag.width - 1, br);
-	ft_br(x, br);
+	i = 0;
+	str = ft_memalloc(sizeof(char) * 5);
+	ret = ft_wctomb(str, ((wchar_t)va_arg(ap, int)));
+	if (flag.width > ret)
+		ft_width_wchar(c, flag.width - ret, br);
+	while (i < ret)
+	{
+		ft_br(str[i], br);
+		i++;
+	}
 	return (1);
 }

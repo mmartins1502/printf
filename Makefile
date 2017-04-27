@@ -6,7 +6,7 @@
 #    By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 14:18:14 by mmartins          #+#    #+#              #
-#    Updated: 2017/04/10 12:56:27 by mmartins         ###   ########.fr        #
+#    Updated: 2017/04/27 15:48:22 by mmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ SRCS =		main.c \
 			mod.c \
 			conv_str.c \
 			conv_char.c \
+			conv_wchar.c \
+			ft_wctomb.c \
+			conv_wstr.c \
 
 OBJS =		$(SRCS:.c=.o)
 

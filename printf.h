@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:40:43 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/10 12:56:04 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/04/27 18:11:31 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include "./libft/libft.h"
 # include <stdio.h>
+# include <wchar.h>
+# include <locale.h>
 
 typedef struct	s_flag
 {
@@ -60,5 +62,9 @@ int				conv_uint(t_br *br, va_list ap, t_flag flag, char c);
 uintmax_t		modif_long(va_list ap, t_flag flag);
 int				conv_str(t_br *br, va_list ap, t_flag flag);
 int				conv_char(t_br *br, va_list ap, t_flag flag);
+int				ft_wctomb(char *s, wchar_t wc);
+int				conv_wchar(t_br *br, va_list ap, t_flag flag);
+int				conv_wstr(t_br *br, va_list ap, t_flag flag);
+int				ft_printf2(const char *fmt, t_br *br, va_list ap);
 
 #endif
