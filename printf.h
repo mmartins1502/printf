@@ -15,10 +15,11 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
 # include <stdio.h>
 # include <wchar.h>
-# include <locale.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct	s_flag
 {
@@ -57,7 +58,7 @@ int				chk_modjz(const char *fmt, int *i, t_flag *flag);
 int				chk_prec(const char *fmt, int *i, t_flag *flag);
 intmax_t		modif_long_int(va_list ap, t_flag flag);
 int				ft_precision(char **str, t_flag flag, intmax_t nb, int size);
-int				ft_width(char **str, t_flag flag, intmax_t nb, int size);
+int				ft_width(char **str, t_flag flag, int size);
 int				conv_uint(t_br *br, va_list ap, t_flag flag, char c);
 uintmax_t		modif_long(va_list ap, t_flag flag);
 int				conv_str(t_br *br, va_list ap, t_flag flag);
@@ -66,5 +67,19 @@ int				ft_wctomb(char *s, wchar_t wc);
 int				conv_wchar(t_br *br, va_list ap, t_flag flag);
 int				conv_wstr(t_br *br, va_list ap, t_flag flag);
 int				ft_printf2(const char *fmt, t_br *br, va_list ap);
+int				ft_width_str(char c, int n, t_br *br);
+int				ft_isdigit(int c);
+void			*ft_memalloc(size_t size);
+void			*ft_memset(void *s, int c, size_t n);
+char			*ft_strnew(size_t size);
+int				ft_atoi(char *nptr);
+char			*ft_uitoa(intmax_t n);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			ft_putnstr(char *str, int n);
+size_t			ft_strlen(char *str);
+char			*ft_itoa_base(uintmax_t n, char c);
+int				set_0x(char **str, t_flag flag);
+int				conv_pointer(t_br *br, va_list ap, t_flag flag);
+int				conv_per(char x, t_br *br, t_flag flag);
 
 #endif

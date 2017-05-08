@@ -5,250 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 14:01:51 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/27 18:19:54 by mmartins         ###   ########.fr       */
+/*   Created: 2017/05/07 15:53:32 by mmartins          #+#    #+#             */
+/*   Updated: 2017/05/07 18:46:30 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdio.h>
-#include <wchar.h>
-#include <locale.h>
 
-static void	test_3(void)
+int		main(void)
 {
-	printf("\n>>>>>>>>>>>>>>>> TEST_3 <<<<<<<<<<<<<<<<\n\n");
-	printf("P = %#x\n", 42);
-	ft_printf("F = %#x\n\n", 42);
-
-	printf("P = %#O\n", 42);
-	ft_printf("F = %#O\n\n", 42);
-
-	printf("P = %#o\n", 42);
-	ft_printf("F = %#o\n\n", 42);
-
-	printf("P = {%030x}\n", 0xFFFF);
-	ft_printf("F = {%030x}\n\n", 0xFFFF);
-
-	ft_printf("F = \n");
-	printf("P = \n\n");
-
-	ft_printf("F = %%\n");
-	printf("P = %%\n\n");
-
-	ft_printf("F = %d\n", 42);
-	printf("P = %d\n\n", 42);
-
-	ft_printf("F = %d%d\n", 42, 41);
-	printf("P = %d%d\n\n", 42, 41);
-
-	ft_printf("F = %d%d%d\n", 42, 43, 44);
-	printf("P = %d%d%d\n\n", 42, 43, 44);
-
-	ft_printf("F = %ld\n", 2147483647);
-	printf("P = %ld\n\n", 2147483647);
-
-	ft_printf("F = %lld\n", 9223372036854775807);// PB
+	ft_printf("\n");
+	ft_printf("F = %5%\n");
+	printf("P = %5%\n\n");
+	ft_printf("F = %-5%\n");
+	printf("P = %-5%\n\n");
+	ft_printf("F = %#08x\n", 42);
+	printf("P = %#08x\n\n", 42);
+	ft_printf("F = @moulitest: %#.x %#.0x\n", 0, 0);
+	printf("P = @moulitest: %#.x %#.0x\n\n", 0, 0);
+	ft_printf("F = @moulitest: %.x %.0x\n", 0, 0);
+	printf("P = @moulitest: %.x %.0x\n\n", 0, 0);
+	ft_printf("F = @moulitest: %5.x %5.0x\n", 0, 0);
+	printf("P = @moulitest: %5.x %5.0x\n\n", 0, 0);
+	ft_printf("F = %.2s is a string\n", "this");
+	printf("P = %.2s is a string\n\n", "this");
+	ft_printf("F = %5.2s is a string\n", "this");
+	printf("P = %5.2s is a string\n\n", "this");
+	ft_printf("F = %-.2s is a string\n", "this");
+	printf("P = %-.2s is a string\n\n", "this");
+	ft_printf("F = %-5.2s is a string\n", "this");
+	printf("P = %-5.2s is a string\n\n", "this");
+	ft_printf("F = %-5c\n", 42);
+	printf("P = %-5c\n\n", 42);
+	ft_printf("F = @moulitest: %.o %.0o\n", 0, 0);
+	printf("P = @moulitest: %.o %.0o\n\n", 0, 0);
+	ft_printf("F = @moulitest: %5.o %5.0o\n", 0, 0);
+	printf("P = @moulitest: %5.o %5.0o\n\n", 0, 0);
+	ft_printf("F = %0+5d\n", 42);
+	printf("P = %0+5d\n\n", 42);
+	ft_printf("F = %05d\n", -42);
+	printf("P = %05d\n\n", -42);
+	ft_printf("F = %0+5d\n", -42);
+	printf("P = %0+5d\n\n", -42);
+	ft_printf("F = %lld\n", 9223372036854775807);
 	printf("P = %lld\n\n", 9223372036854775807);
-
-	ft_printf("F = %x\n", 505);
-	printf("P = %x\n\n", 505);
-
-	ft_printf("F = %X\n", 505);
-	printf("P = %X\n\n", 505);
-	// ft_printf("%p\n", &ft_printf);
-
-	ft_printf("F = %20.15d\n", 54321);
-	printf("P = %20.15d\n\n", 54321);
-
-	ft_printf("F = %-10d\n", 3);
-	printf("P = %-10d\n\n", 3);
-}
-
-static void	test_2(void)
-{
-	printf("\n>>>>>>>>>>>>>>>> TEST_2 <<<<<<<<<<<<<<<<\n\n");
-	printf("P = %%\n", "test");
-	ft_printf("F = %%\n\n", "test");
-
-	printf("P = % Z%s\n", "test");
-	ft_printf("F = % Z%s\n", "test");
-
-	printf("P = %05%\n");
-	ft_printf("F = %05%\n\n");//PB
-
-	printf("P = % hZ\n");
-	ft_printf("F = % hZ\n\n");
-
-	printf("P = %Z\n");
-	ft_printf("F = %Z\n\n");
-
-	printf("P = % h\n");
-	ft_printf("F = % h\n\n");
-
-	printf("P = % \n");
-	ft_printf("F = % \n\n");
-
-	printf("P = %\n");
-	ft_printf("F = %\n\n");
-
-	printf("p%p\n", 42);
-	ft_printf("f%p\n\n", 42);
-
-	printf("P = %#X\n", 42);
-	ft_printf("F = %#X\n", 42);// PB
-	test_3();
-}
-
-static void	test_1(void)
-{
-	printf("\n>>>>>>>>>>>>>>>> TEST_1 <<<<<<<<<<<<<<<<\n\n");
-	printf("P = % Z\n");
-	ft_printf("F = % Z\n\n");
-
-	printf("P = {%05.S}\n\n", 0);
-	ft_printf("F = {%05.S}\n\n", 0);
-
-	printf("P = %C%C\n", '4', '2');
-	ft_printf("F = %C%C\n\n", '4', '2');
-
-	ft_printf("F = %lc\n", 15000);
-	printf("P = %lc\n\n", 15000);
-
-	printf("P = %lc, %lc\n", L'暖', L'ح');
-	ft_printf("F = %lc, %lc\n\n", L'暖', L'ح');
-
-	printf("P = %04lc, %8lc\n", L'暖', L'ح');
-	ft_printf("F = %04lc, %8lc\n\n", L'暖', L'ح');
-
-	printf("P = %ls\n", L"我是一只猫。");
-	ft_printf("F = %ls\n\n", L"我是一只猫。");
-
-	printf("P = %.4S\n", L"我是一只猫。");
-	ft_printf("F = %.4S\n\n", L"我是一只猫。");
-
-	printf("P = {%15.5c}\n", 'd');
-	ft_printf("F = {%15.5c}\n\n", 'd');
-
-	printf("p{%-15Z}\n", 123);
-	ft_printf("f{%-15Z}\n\n", 123);
-
-	printf("P = %#o\n", 42);
-	ft_printf("F = %#o\n\n", 42);
-
-	printf("p.%%.%%.%%.%%.%%.%%.%%.%%.\n");
-	ft_printf("f.%%.%%.%%.%%.%%.%%.%%.%%.\n\n");
-	test_2();
-}
-
-static void	test_0(void)
-{
-	printf("\n>>>>>>>>>>>>>>>> TEST_0 <<<<<<<<<<<<<<<<\n\n");
-	ft_printf("F = %ll#x\n", 9223372036854775807);
-	printf("P = %ll#x\n\n", 9223372036854775807);
-
-	ft_printf("F = %zhd\n", 4294967296);//PB
-	printf("P = %zhd\n\n", 4294967296);
-
-	ft_printf("F = %jzd\n", 9223372036854775807);//PB
-	printf("P = %jzd\n\n", 9223372036854775807);
-
-	ft_printf("F = %jhd\n", 9223372036854775807);//PB
-	printf("P = %jhd\n\n", 9223372036854775807);
-
-	ft_printf("F = %lhl\n", 9223372036854775807);
-	printf("P = %lhl\n\n", 9223372036854775807);
-
-	ft_printf("F = %lhlz\n", 9223372036854775807);
-	printf("P = %lhlz\n\n", 9223372036854775807);
-
-	ft_printf("F = %zj\n", 9223372036854775807);
-	printf("P = %zj\n\n", 9223372036854775807);
-
-	ft_printf("F = %lhh\n", 2147483647);
-	printf("P = %lhh\n\n", 2147483647);
-
-	ft_printf("F = %hhld\n", 128);
-	printf("P = %hhld\n\n", 128);
-
-	ft_printf("F = @main_ftprintf: %####0000 33..1..#00d\n", 256);
-	printf("P = @main_printf: %####0000 33..1..#00d\n\n", 256);
-
-	ft_printf("F = @main_ftprintf: %####0000 33..1d\n", 256);
-	printf("P = @main_printf: %####0000 33..1d\n\n", 256);
-
-	ft_printf("F = @main_ftprintf: %###-#0000 33...12..#0+0d\n", 256);
-	printf("P = @main_printf: %###-#0000 33...12..#0+0d\n\n", 256);
-
-	ft_printf("F = % \n");
-	printf("P = % \n\n");
-
-	ft_printf("F = % Z\n");
-	printf("P = % Z\n\n");
-	test_1();
-}
-
-int			main(void)
-{
-	setlocale(LC_ALL, "");
-	printf("\n>>>>>>>>>>>>>>>> MAIN <<<<<<<<<<<<<<<<\n\n");
-	ft_printf("F = % d\n", 3);
-	printf("P = % d\n\n", 3);
-
-	ft_printf("F = %+d\n", 3);
-	printf("P = %+d\n\n", 3);
-
-	ft_printf("F = %010d\n", 1);
-	printf("P = %010d\n\n", 1);
-
-	ft_printf("F = %hd\n", 0);
-	printf("P = %hd\n\n", 0);
-
-	ft_printf("F = %jd\n", 9223372036854775807);//PB
+	ft_printf("F = %lld\n", -9223372036854775808);
+	printf("P = %lld\n\n", -9223372036854775808);
+	ft_printf("F = %jd\n", 9223372036854775807);
 	printf("P = %jd\n\n", 9223372036854775807);
-
-	ft_printf("F = %zd\n", 4294967295);//PB
+	ft_printf("F = %zd\n", 4294967295);
 	printf("P = %zd\n\n", 4294967295);
-
-	ft_printf("F = %\n");
-	printf("P = %\n\n");
-
-	ft_printf("F = %U\n", 4294967295);
-	printf("P = %U\n\n", 4294967295);
-
-	ft_printf("F = %u\n", 4294967295);
-	printf("P = %u\n\n", 4294967295);
-
-	ft_printf("F = %o\n", 40);
-	printf("P = %o\n\n", 40);
-
-	ft_printf("F = %O\n", 40);
-	printf("P = %O\n\n", 40);
-
-	ft_printf("F = %%#08x\n", 42);
-	printf("P = %%#08x\n\n", 42);
-
-	ft_printf("F = %x\n", 1000);
-	printf("P = %x\n\n", 1000);
-
-	printf("P = %#X\n", 1000);
-	ft_printf("F = %#X\n\n", 1000);
-
-	ft_printf("F = %s\n", NULL);
-	printf("P = %s\n\n", NULL);
-
-	ft_printf("F = %S\n", L"ݗݜशব");
-	printf("P = %S\n\n", L"ݗݜशব");
-
-	ft_printf("F = %s%s\n", "test", "test");
-	printf("P = %s%s\n\n", "test", "test");
-
-	ft_printf("F = %s%s%s\n", "test", "test", "test");
-	printf("P = %s%s%s\n\n", "test", "test", "test");
-
-	ft_printf("F = %C\n", 15000);
-	printf("P = %C\n\n", 15000);
-
-	test_0();
+	ft_printf("F = %zd\n", 4294967296);
+	printf("P = %zd\n\n", 4294967296);
+	ft_printf("F = % 10.5d\n", 4242);
+	printf("P = % 10.5d\n\n", 4242);
+	ft_printf("F = @moulitest: %.d %.0d\n", 0, 0);
+	printf("P = @moulitest: %.d %.0d\n\n", 0, 0);
+	ft_printf("F = @moulitest: %5.d %5.0d\n", 0, 0);
+	printf("P = @moulitest: %5.d %5.0d\n\n", 0, 0);
+	ft_printf("F = %hU\n", "4294967296");
+	printf("P = %hU\n\n", "4294967296");
+	ft_printf("F = %U\n", "4294967296");
+	printf("P = %U\n\n", "4294967296");
+	printf("{%30S}", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
 	return (0);
 }
