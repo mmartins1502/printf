@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:16:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/05/07 16:01:08 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/05/09 15:56:36 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,28 @@ int				ft_width(char **str, t_flag flag, int size)
 	return (1);
 }
 
-static int		set_sign(char **str, intmax_t nb, int size)
+static int		set_sign(char **str, intmax_t nbr, int size, t_flag flag)
 {
 	char	*tmp;
 	char	c;
+	int		i;
 
-	c = (nb < 0 ? '-' : '+');
+	i = 0;
+	c = (nbr < 0 ? '-' : '+');
 	tmp = ft_memalloc(sizeof(char) * size + 1);
 	ft_memcpy(tmp + 1, *str, size);
-	tmp[0] = c;
-	tmp[size + 1] = '\0';
+	if (flag.zero == 0)
+	{
+		tmp[0] = ' ';
+		while (tmp[i] == ' ')
+			i++;
+		tmp[i - 1] = c;
+	}
+	else
+	{
+		tmp[0] = c;
+		tmp[size + 1] = '\0';
+	}
 	free(*str);
 	*str = ft_memalloc(sizeof(char) * size + 1);
 	ft_memcpy(*str, tmp, size + 2);
@@ -48,50 +60,42 @@ static int		set_sign(char **str, intmax_t nb, int size)
 	return (1);
 }
 
-int				ft_precision(char **str, t_flag flag, intmax_t nb, int size)
+static char		*conv_int_2(t_flag flag, intmax_t nbr, t_br *br)
 {
-	char	*tmp;
+	char	*str;
 
-	(void)nb;
-	tmp = ft_strnew(flag.prec);
-	ft_memset(tmp, '0', flag.prec);
-	ft_memcpy(tmp + (flag.prec - size), *str, size);
-	free(*str);
-	*str = ft_strnew(flag.prec);
-	ft_memcpy(*str, tmp, flag.prec);
-	free(tmp);
-	return (1);
+	if (flag.prec == 0 && nbr == 0)
+		str = ft_strnew(0);
+	else
+		str = ft_uitoa(nbr);
+	reset_flag(nbr, &flag, 'i');
+	if (flag.space == 1)
+	{
+		ft_br(' ', br);
+		if (flag.width > 0)
+			flag.width = flag.width - 1;
+	}
+	return (str);
 }
 
-static int		reset_flag(intmax_t nb, t_flag *flag)
+int				conv_int(t_br *br, va_list ap, t_flag flag, char c)
 {
-	if (flag->zero == 1 && (flag->prec >= 0 || flag->minus == 1))
-		flag->zero = 0;
-	if (flag->space == 1 && (flag->plus == 1 || nb < 0))
-		flag->space = 0;
-	return (1);
-}
-
-int				conv_int(t_br *br, va_list ap, t_flag flag)
-{
-	char			*str;
-	intmax_t		nb;
-	int				j;
-	int				size;
+	char		*str;
+	intmax_t	nbr;
+	int			j;
+	size_t		size;
 
 	j = -1;
-	nb = modif_long_int(ap, flag);
-	str = ft_uitoa(nb);
-	reset_flag(nb, &flag);
-	if (flag.space == 1)
-		ft_br(' ', br);
-	if (flag.prec >= 0 && flag.prec > (size = ft_strlen(str)))
-		ft_precision(&str, flag, nb, size);
-	if ((flag.plus == 1 && nb >= 0) || nb < 0)
-		set_sign(&str, nb, (size = ft_strlen(str)));
-	size = ft_strlen(str);
-	if (flag.width > (unsigned int)size)
+	if (c == 'D')
+		flag.l = 1;
+	nbr = modif_long_int(ap, flag);
+	str = conv_int_2(flag, nbr, br);
+	if (flag.prec >= 0 && flag.prec > (intmax_t)(size = ft_strlen(str)))
+		ft_prec(&str, flag, size);
+	if (flag.width > (size = ft_strlen(str)))
 		ft_width(&str, flag, size);
+	if ((flag.plus == 1 && nbr >= 0) || nbr < 0)
+		set_sign(&str, nbr, (size = ft_strlen(str)), flag);
 	while (str[++j])
 		ft_br(str[j], br);
 	free(str);

@@ -6,25 +6,15 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 17:38:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/21 13:11:03 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/05/09 14:43:22 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static char	set_char(char c, char nb)
-{
-	if (nb + '0' > 9 + '0' && c == 'x')
-		return (nb + 'a' - 10);
-	else if (nb + '0' > 9 + '0' && c == 'X')
-		return (nb + 'A' - 10);
-	else
-		return (nb + '0');
-}
-
 static int	nb_len(uintmax_t n, int base)
 {
-	int len;
+	int		len;
 
 	len = 1;
 	while (n > (uintmax_t)base - 1)
@@ -48,6 +38,16 @@ static int	set_base(char c)
 	else
 		base = 0;
 	return (base);
+}
+
+static char	set_char(char c, char nb)
+{
+	if (nb + '0' > 9 + '0' && c == 'x')
+		return (nb + 'a' - 10);
+	else if (nb + '0' > 9 + '0' && c == 'X')
+		return (nb + 'A' - 10);
+	else
+		return (nb + '0');
 }
 
 char		*ft_itoa_base(uintmax_t n, char c)

@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:40:43 by mmartins          #+#    #+#             */
-/*   Updated: 2017/04/27 18:11:31 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/05/08 21:59:28 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				main(void);
 int				checkflag(int *i, const char *fmt, t_flag *flag);
 int				ft_printf(const char *fmt, ...);
 int				parse(char c, t_br *br, va_list ap, t_flag flag);
-int				conv_int(t_br *br, va_list ap, t_flag flag);
+int				conv_int(t_br *br, va_list ap, t_flag flag, char c);
 int				ft_br(char c, t_br *br);
 int				is_conv(char c);
 int				chk_width(const char *fmt, int *i, t_flag *flag);
@@ -57,7 +57,7 @@ int				chk_modhl(const char *fmt, int *i, t_flag *flag);
 int				chk_modjz(const char *fmt, int *i, t_flag *flag);
 int				chk_prec(const char *fmt, int *i, t_flag *flag);
 intmax_t		modif_long_int(va_list ap, t_flag flag);
-int				ft_precision(char **str, t_flag flag, intmax_t nb, int size);
+int				ft_prec(char **str, t_flag flag, size_t size);
 int				ft_width(char **str, t_flag flag, int size);
 int				conv_uint(t_br *br, va_list ap, t_flag flag, char c);
 uintmax_t		modif_long(va_list ap, t_flag flag);
@@ -81,5 +81,6 @@ char			*ft_itoa_base(uintmax_t n, char c);
 int				set_0x(char **str, t_flag flag);
 int				conv_pointer(t_br *br, va_list ap, t_flag flag);
 int				conv_per(char x, t_br *br, t_flag flag);
+int				reset_flag(intmax_t nbr, t_flag *flag, char c);
 
 #endif

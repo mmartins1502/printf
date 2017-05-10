@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:27:14 by mmartins          #+#    #+#             */
-/*   Updated: 2017/05/07 22:27:46 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/05/08 22:00:44 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		is_conv(char c)
 int		parse(char c, t_br *br, va_list ap, t_flag flag)
 {
 	if (c == 'd' || c == 'D' || c == 'i')
-		conv_int(br, ap, flag);
+		conv_int(br, ap, flag, c);
 	else if (c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
 	|| c == 'X')
 		conv_uint(br, ap, flag, c);

@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:54:04 by mmartins          #+#    #+#             */
-/*   Updated: 2017/05/07 22:40:20 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/05/08 21:10:45 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,18 @@ int			conv_char(t_br *br, va_list ap, t_flag flag)
 
 	c = (flag.zero == 1 ? '0' : ' ');
 	x = (char)va_arg(ap, int);
-	if (flag.width > 1)
+	if (flag.width > 1 && flag.minus == 1)
+	{
+		ft_br(x, br);
 		ft_width_char(c, flag.width - 1, br);
-	ft_br(x, br);
+	}
+	else if (flag.width > 1)
+	{
+		ft_width_char(c, flag.width - 1, br);
+		ft_br(x, br);
+	}
+	else
+		ft_br(x, br);
 	return (1);
 }
 
@@ -82,31 +91,17 @@ int			conv_per(char x, t_br *br, t_flag flag)
 	char	c;
 
 	c = (flag.zero == 1 ? '0' : ' ');
-	if (flag.width > 1)
+	if (flag.width > 1 && flag.minus == 1)
 	{
-		if (flag.minus == 1)
-			flag.minus = 0;
+		ft_br(x, br);
 		ft_width_char(c, flag.width - 1, br);
 	}
-	ft_br(x, br);
+	else if (flag.width > 1)
+	{
+		ft_width_char(c, flag.width - 1, br);
+		ft_br(x, br);
+	}
+	else
+		ft_br(x, br);
 	return (1);
 }
-// {
-// 	char	*str;
-// 	int		i;
-// 	char	c;
-//
-// 	i = 0;
-// 	str = ft_strnew(1);
-// 	str[0] = x;
-// 	c = flag.zero == 1 ? '0' : ' ';
-// 	if (flag.width > 1)
-// 		ft_swidth(flag.width - 1, &str, flag.minus, c);
-// 	while (str[i])
-// 	{
-// 		ft_br(str[i], br);
-// 		i++;
-// 	}
-// 	free(str);
-// 	return (1);
-// }
