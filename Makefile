@@ -1,55 +1,57 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/05/11 12:19:26 by mmartins          #+#    #+#              #
+#    Updated: 2017/05/11 15:54:32 by mmartins         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libftprintf.a
 
-H_DIR = .
-C_DIR = src
-O_DIR = objects
+SRC = 	conv_int.c \
+		flag.c \
+		ft_printf.c \
+		conv_uint.c \
+		conv_str.c \
+		conv_char.c \
+		conv_wchar.c \
+		ft_wctomb.c \
+		ft_uitoa.c \
+		ft_isdigit.c \
+		ft_memalloc.c \
+		ft_memset.c \
+		ft_strnew.c \
+		ft_atoi.c \
+		ft_memcpy.c \
+		ft_putnstr.c \
+		ft_strlen.c \
+		ft_uitoa_base.c \
+		conv_pointer.c \
+		conv_wstr.c \
+		ft_br_isconv_notflag.c \
+		ft_width_prec_resetflag.c \
 
-LINKS = -I$(H_DIR)
-
-C_FILES = src/conv_int.c \
-					src/flags.c \
-					src/ft_printf2.c \
-					src/conv_uint.c \
-					src/mod.c \
-					src/conv_str.c \
-					src/conv_char.c \
-					src/conv_wchar.c \
-					src/ft_wctomb.c \
-					src/conv_wstr.c \
-					src/ft_uitoa.c \
-					src/ft_isdigit.c \
-					src/ft_memalloc.c \
-					src/ft_memset.c \
-					src/ft_strnew.c \
-					src/ft_atoi.c \
-					src/ft_memcpy.c \
-					src/ft_putnstr.c \
-					src/ft_strlen.c \
-					src/ft_itoa_base.c \
-					src/conv_pointer.c \
-					src/conv_wstr.c
-
-O_FILES = $(C_FILES:$(C_DIR)/%.c=$(O_DIR)/%.o)
-
-FLAGS = -Werror -Wextra -Wall
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(O_FILES)
-	@ar rcs $@ $^
-	@echo "\033[33;32m===      LIBFT    FINISHED        === \n		√\n"
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-$(O_DIR)/%.o: $(C_DIR)/%.c
-	@mkdir -p $(O_DIR)
-	@gcc $(FLAGS) $(LINKS) -o $@ -c $<
+$(OBJ):
+	gcc -g -Wall -Wextra -Werror -c $*.c -o $@ -I.
 
 clean:
-	@echo "\033[33;32m===    DELETING   OBJECTS         === \n 		√\n"
-	@rm -rf $(O_DIR)
-
+	rm -rf $(OBJ)
 
 fclean: clean
-	@echo "\033[33;32m===    DELETING   libftprintf.a   === \n 		√\n"
-	@rm -f $(NAME)
+	rm -rf $(NAME)
 
-re : fclean all
+re: fclean all
+
+.PHONY: all clean fclean
